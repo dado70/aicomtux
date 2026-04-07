@@ -4,10 +4,9 @@
 # Setup interattivo Aicomtec Linux
 #
 # Cosa fa:
-#   1) Sposta il pannello Cinnamon in alto (top)
-#   2) Installa applicazioni Flatpak e APT con descrizione
+#   1) Installa applicazioni Flatpak e APT con descrizione
 #      e conferma interattiva per ognuna
-#   3) Scarica e imposta il wallpaper ufficiale Aicomtec
+#   2) Scarica e imposta il wallpaper ufficiale Aicomtec
 #
 # Uso:
 #   chmod +x aicomtec-setup.sh
@@ -85,9 +84,9 @@ echo ""
 read -rp "  Premi INVIO per iniziare..." _
 
 # ═══════════════════════════════════════════════════════════════
-# FASE 2 — FLATPAK SETUP
+# FASE 1 — FLATPAK SETUP
 # ═══════════════════════════════════════════════════════════════
-section "FASE 2 — Configurazione Flatpak"
+section "FASE 1 — Configurazione Flatpak"
 
 if ! has flatpak; then
   info "Flatpak non trovato. Installo..."
@@ -134,9 +133,9 @@ install_flatpak() {
 }
 
 # ═══════════════════════════════════════════════════════════════
-# FASE 3 — APPLICAZIONI FLATPAK
+# FASE 2 — APPLICAZIONI FLATPAK
 # ═══════════════════════════════════════════════════════════════
-section "FASE 3 — Applicazioni Flatpak"
+section "FASE 2 — Applicazioni Flatpak"
 
 info "Verranno proposti i seguenti pacchetti Flatpak da Flathub."
 echo ""
@@ -197,9 +196,9 @@ install_flatpak \
   "Applicazione per prendere appunti scritti a mano, annotare PDF e disegnare con tavoletta grafica o touchscreen."
 
 # ═══════════════════════════════════════════════════════════════
-# FASE 4 — APPLICAZIONI APT
+# FASE 3 — APPLICAZIONI APT
 # ═══════════════════════════════════════════════════════════════
-section "FASE 4 — Applicazioni APT"
+section "FASE 3 — Applicazioni APT"
 
 info "Verranno proposti i seguenti pacchetti dal repository apt."
 echo ""
@@ -306,9 +305,9 @@ else
 fi
 
 # ═══════════════════════════════════════════════════════════════
-# FASE 5 — WALLPAPER UFFICIALE AICOMTEC
+# FASE 4 — WALLPAPER UFFICIALE AICOMTEC
 # ═══════════════════════════════════════════════════════════════
-section "FASE 5 — Wallpaper ufficiale Aicomtec"
+section "FASE 4 — Wallpaper ufficiale Aicomtec"
 
 WALLPAPER_URL="https://www.scapuzzi.it/cloud/index.php/s/PG4rSpeKWmzYoMM/download"
 WALLPAPER_DIR="/usr/share/backgrounds/aicomtec"
@@ -413,47 +412,6 @@ if flatpak list --app 2>/dev/null | grep -q .; then
 fi
 
 
-# ═══════════════════════════════════════════════════════════════
-# FASE 1 — PANNELLO IN ALTO
-# ═══════════════════════════════════════════════════════════════
-section "FASE 1 — Pannello Cinnamon in alto"
-
-info "Il pannello verrà spostato dalla posizione attuale verso il top dello schermo."
-echo ""
-
-if ask "Spostare il pannello Cinnamon in alto?"; then
-
-  # Cinnamon gestisce i pannelli tramite dconf
-  # Il pannello principale è panels-enabled e panels-height
-  # La posizione si imposta con panel-edit-mode e lo schema
-  # org.cinnamon panels-enabled contiene stringhe tipo "1:0:bottom"
-  # formato: "ID:MONITOR:POSIZIONE" dove posizione = top|bottom
-
-  CURRENT_PANELS=$(gsettings get org.cinnamon panels-enabled 2>/dev/null || echo "[]")
-
-  if echo "$CURRENT_PANELS" | grep -q "bottom"; then
-    # Sostituisce bottom con top per tutti i pannelli
-    NEW_PANELS=$(echo "$CURRENT_PANELS" | sed "s/:bottom/:top/g")
-    gsettings set org.cinnamon panels-enabled "$NEW_PANELS"
-    ok "Pannello spostato in alto."
-    info "Riavvio Cinnamon per applicare..."
-    cinnamon --replace &>/dev/null & disown
-    sleep 3
-  elif echo "$CURRENT_PANELS" | grep -q "top"; then
-    warn "Il pannello è già in alto. Nessuna modifica necessaria."
-    SKIPPED=$((SKIPPED+1))
-  else
-    # Fallback: imposta direttamente tramite schema panels
-    # Prova con il pannello ID 1 su monitor 0
-    gsettings set org.cinnamon panels-enabled "['1:0:top']" 2>/dev/null && \
-      ok "Pannello impostato in alto (configurazione default)." || \
-      fail "Impossibile spostare il pannello automaticamente."
-    info "Se il pannello non si è spostato, fai clic destro sul pannello → Impostazioni → Posizione: In alto."
-  fi
-
-else
-  skip "Pannello: saltato."
-fi
 
 
 echo ""
