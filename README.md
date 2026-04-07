@@ -1,6 +1,7 @@
 Semplice Script bash per personalizzare l'aspetto di Linux Mint 22.3 Cinnamo 64 per l'associazione AICOMTEC https://www.aicomtec.it/
 
-**Usage**
+**Usage**  
+Aprire un terminale dal menu di Mint e digitare: 
 ```bash
 $ chmod +x aicomtec-setup.sh
 $ ./aicomtec-setup.sh
