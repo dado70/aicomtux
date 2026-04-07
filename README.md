@@ -6,8 +6,6 @@ $ sudo chmod +x aicomtec-setup.sh
 $ sudo ./aicomtec-setup.sh
 ```
 Lo script è diviso in 5 fasi, tutte interattive:  
-##**Fase 1 — Pannello in alto**  
-usa `gsettings` su `org.cinnamon panels-enabled` per sostituire `:bottom` con `:top` e riavvia Cinnamon automaticamente con `cinnamon --replace`.  
 
 ##**Fase 2 — Setup Flatpak**  
 installa Flatpak e aggiunge Flathub se non presenti, prima di qualsiasi app.  
@@ -20,5 +18,9 @@ stessa logica. Joplin è un caso speciale — non ha un pacchetto apt ufficiale,
 
 ##**Fase 5 — Wallpaper**  
 scarica da `scapuzzi.it`, verifica che sia un'immagine valida, chiede se installarlo per tutti gli utenti (sistema) o solo per l'utente corrente, imposta lo sfondo via `gsettings` e aggiorna anche `/etc/lightdm/lightdm-gtk-greeter.conf` se il file è in `/usr/share/`.  
+
+##**Fase 1 — Pannello in alto**  
+usa `gsettings` su `org.cinnamon panels-enabled` per sostituire `:bottom` con `:top` e riavvia Cinnamon automaticamente con `cinnamon --replace`.  
+
 
 Al termine mostra un riepilogo con contatori: installati / saltati / falliti.
