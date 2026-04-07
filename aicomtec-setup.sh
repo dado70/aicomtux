@@ -411,9 +411,6 @@ if flatpak list --app 2>/dev/null | grep -q .; then
   info "Al primo avvio potrebbero richiedere qualche secondo in più."
 fi
 
-
-
-
 echo ""
 echo -e "  ${DIM}Aicomtec Linux — github.com/dado70/Mint-dado-Aicomtec${NC}"
 echo ""
