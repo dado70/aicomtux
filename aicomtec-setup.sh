@@ -195,6 +195,13 @@ install_flatpak \
   "Xournal++" \
   "Applicazione per prendere appunti scritti a mano, annotare PDF e disegnare con tavoletta grafica o touchscreen."
 
+install_flatpak \
+  "com.bitwarden.desktop" \
+  "Bitwarden" \
+  "A secure and free password manager for all of your devices."
+
+  
+
 # ═══════════════════════════════════════════════════════════════
 # FASE 3 — APPLICAZIONI APT
 # ═══════════════════════════════════════════════════════════════
