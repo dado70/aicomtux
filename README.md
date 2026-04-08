@@ -1,4 +1,4 @@
-Semplice Script bash per personalizzare l'aspetto di Linux Mint 22.3 Cinnamo 64 per l'associazione AICOMTEC https://www.aicomtec.it/
+Semplice Script bash per personalizzare l'aspetto di Linux Mint 22.3 "Zita" Cinnamon 64 per l'associazione AICOMTEC https://www.aicomtec.it/
 
 **Usage**  
 Aprire un terminale dal menu di Mint e digitare: 
